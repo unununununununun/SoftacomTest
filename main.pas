@@ -47,38 +47,47 @@ implementation
 procedure TMForm.b1Click(Sender: TObject);
 var
  vr,vr1,vr2 : VisitorResponse2;
+ err: boolean;
 
 begin
-b1.Text:= 'load...';
-Memo1.Lines.Clear;
+ err:=false;
+ b1.Text:= 'load...';
+ Memo1.Lines.Clear;
   TTask.Run(
   procedure
    begin
-   is1 := IntegrationService1.GetIntegrationService();
-
+   try
+    is1 := IntegrationService1.GetIntegrationService();
     AddSoapHeaderSecurity(is1,'demouser','AfDGlGhWIf12345');
-
+    except on E:Exception do
+    begin
+     TThread.Synchronize(nil, procedure begin memo1.text:=#13#10+'  '+E.Message; end);
+     err := not err;
+    end;
+    end;
     TThread.Synchronize(nil,
     procedure
     begin
+     if not err then
+     begin
+      vr :=  is1.GetVisitors(7701);
+      memo1.Lines.Add(#13#10);
+      memo1.Lines.Add('  Visitor 7701[0] :: ID=' +vr.Visitors[0].VisitorId.ToString+ ' Name='+vr.Visitors[0].VisitorName);
+      memo1.Lines.Add('  Visitor 7701[1] :: ID=' +vr.Visitors[1].VisitorId.ToString+ ' Name='+vr.Visitors[1].VisitorName);
+      memo1.Lines.Add('');
+      AddSoapHeaderSecurity(is1,'demouser','AfDGlGhWIf12345');
 
-     vr :=  is1.GetVisitors(7701);
-     memo1.Lines.Add(#13#10);
-     memo1.Lines.Add('  Visitor 7701[0] :: ID=' +vr.Visitors[0].VisitorId.ToString+ ' Name='+vr.Visitors[0].VisitorName);
-     memo1.Lines.Add('  Visitor 7701[1] :: ID=' +vr.Visitors[1].VisitorId.ToString+ ' Name='+vr.Visitors[1].VisitorName);
-     memo1.Lines.Add('');
-     AddSoapHeaderSecurity(is1,'demouser','AfDGlGhWIf12345');
+      vr :=  is1.GetVisitors(7703);
+      memo1.Lines.Add('  Visitor 7703[0] :: ID=' +vr.Visitors[0].VisitorId.ToString+ ' Name='+vr.Visitors[0].VisitorName);
+      memo1.Lines.Add('  Visitor 7703[1] :: ID=' +vr.Visitors[1].VisitorId.ToString+ ' Name='+vr.Visitors[1].VisitorName);
+      memo1.Lines.Add('  Visitor 7703[2] :: ID=' +vr.Visitors[2].VisitorId.ToString+ ' Name='+vr.Visitors[2].VisitorName);
+      memo1.Lines.Add('');
+      AddSoapHeaderSecurity(is1,'demouser','AfDGlGhWIf12345');
 
-     vr :=  is1.GetVisitors(7703);
-     memo1.Lines.Add('  Visitor 7703[0] :: ID=' +vr.Visitors[0].VisitorId.ToString+ ' Name='+vr.Visitors[0].VisitorName);
-     memo1.Lines.Add('  Visitor 7703[1] :: ID=' +vr.Visitors[1].VisitorId.ToString+ ' Name='+vr.Visitors[1].VisitorName);
-     memo1.Lines.Add('  Visitor 7703[2] :: ID=' +vr.Visitors[2].VisitorId.ToString+ ' Name='+vr.Visitors[2].VisitorName);
-     memo1.Lines.Add('');
-     AddSoapHeaderSecurity(is1,'demouser','AfDGlGhWIf12345');
-
-     vr :=  is1.GetVisitors(7704);
-     memo1.Lines.Add('  Visitor 7704[0] :: ID=' +vr.Visitors[0].VisitorId.ToString+ ' Name='+vr.Visitors[0].VisitorName);
-     b1.Text:= 'get data';
+      vr :=  is1.GetVisitors(7704);
+      memo1.Lines.Add('  Visitor 7704[0] :: ID=' +vr.Visitors[0].VisitorId.ToString+ ' Name='+vr.Visitors[0].VisitorName);
+      b1.Text:= 'get data';
+     end;
     end);
    end
    );
@@ -109,6 +118,7 @@ end;
 procedure TMForm.Rectangle2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 var hw:hwnd;
 begin
+ //перетягивание окна за любой контрол
  hw := FindWindow(nil,PChar(MForm.Caption));
  ReleaseCapture;
  SendMessage(hw, WM_SysCommand,61458,0);

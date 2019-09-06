@@ -54,13 +54,10 @@ Memo1.Lines.Clear;
   TTask.Run(
   procedure
    begin
-   try
-    is1 := IntegrationService1.GetIntegrationService();
+   is1 := IntegrationService1.GetIntegrationService();
+
     AddSoapHeaderSecurity(is1,'demouser','AfDGlGhWIf12345');
-    except on E:Exception do
-     ShowMessage(E.message);
-     exit;
-    end;
+
     TThread.Synchronize(nil,
     procedure
     begin
@@ -112,7 +109,6 @@ end;
 procedure TMForm.Rectangle2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 var hw:hwnd;
 begin
- //перетягивание окна за любой контрол
  hw := FindWindow(nil,PChar(MForm.Caption));
  ReleaseCapture;
  SendMessage(hw, WM_SysCommand,61458,0);
