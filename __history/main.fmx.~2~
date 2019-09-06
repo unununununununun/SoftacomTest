@@ -1,0 +1,44 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 344
+  ClientWidth = 614
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Position.X = 8.000000000000000000
+    Position.Y = 56.000000000000000000
+    Size.Width = 593.000000000000000000
+    Size.Height = 273.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Viewport.Width = 589.000000000000000000
+    Viewport.Height = 269.000000000000000000
+  end
+  object Button1: TButton
+    Position.X = 8.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'Button1'
+    OnClick = Button1Click
+  end
+  object sosoap: TSoapConnection
+    Agent = 'CodeGear SOAP 1.3'
+    Password = 'AfDGlGhWIf12345'
+    URL = 
+      'https://api-tet-intregationsnowstaging.infolytx.net/v1/Integrati' +
+      'onService.svc/IntegrationService.svc'
+    UserName = 'demouser'
+    UseSOAPAdapter = False
+    Left = 400
+    Top = 16
+  end
+end

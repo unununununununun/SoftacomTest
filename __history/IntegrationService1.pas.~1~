@@ -1,0 +1,406 @@
+// ************************************************************************ //
+// The types declared in this file were generated from data read from the
+// WSDL File described below:
+// WSDL     : https://api-tet-intregationsnowstaging.infolytx.net/v1/IntegrationService.svc?wsdl
+//  >Import : https://api-tet-intregationsnowstaging.infolytx.net/v1/IntegrationService.svc?wsdl>0
+//  >Import : https://api-tet-intregationsnowstaging.infolytx.net/v1/IntegrationService.svc?xsd=xsd0
+//  >Import : https://api-tet-intregationsnowstaging.infolytx.net/v1/IntegrationService.svc?xsd=xsd2
+//  >Import : https://api-tet-intregationsnowstaging.infolytx.net/v1/IntegrationService.svc?xsd=xsd1
+//  >Import : https://api-tet-intregationsnowstaging.infolytx.net/v1/IntegrationService.svc?xsd=xsd3
+//  >Import : https://api-tet-intregationsnowstaging.infolytx.net/v1/IntegrationService.svc?xsd=xsd4
+// Encoding : utf-8
+// Version  : 1.0
+// (05.09.2019 21:10:15 - - $Rev: 93209 $)
+// ************************************************************************ //
+
+unit IntegrationService1;
+
+interface
+
+uses Soap.InvokeRegistry, Soap.SOAPHTTPClient, System.Types, Soap.XSBuiltIns;
+
+const
+  IS_OPTN = $0001;
+  IS_UNBD = $0002;
+  IS_NLBL = $0004;
+  IS_REF  = $0080;
+
+
+type
+
+  // ************************************************************************ //
+  // The following types, referred to in the WSDL document are not being represented
+  // in this file. They are either aliases[@] of other types represented or were referred
+  // to but never[!] declared in the document. The types from the latter category
+  // typically map to predefined/known XML or Embarcadero types; however, they could also 
+  // indicate incorrect WSDL documents that failed to declare or import a schema type.
+  // ************************************************************************ //
+  // !:string          - "http://www.w3.org/2001/XMLSchema"[Gbl]
+  // !:int             - "http://www.w3.org/2001/XMLSchema"[Gbl]
+  // !:long            - "http://www.w3.org/2001/XMLSchema"[Gbl]
+
+  Visitor2             = class;                 { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblCplx] }
+  BaseRespose2         = class;                 { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblCplx] }
+  VisitorResponse2     = class;                 { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblCplx] }
+  VisitorWristbandResponse2 = class;            { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap"[GblCplx] }
+  VisitorWristbandResponse = class;             { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap"[GblElm] }
+  BaseRespose          = class;                 { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblElm] }
+  Visitor              = class;                 { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblElm] }
+  VisitorInfo2         = class;                 { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblCplx] }
+  VisitorInfo          = class;                 { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblElm] }
+  OrderPaymentStatusResponse2 = class;          { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblCplx] }
+  OrderPaymentStatusResponse = class;           { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblElm] }
+  VisitorResponse      = class;                 { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblElm] }
+
+  {$SCOPEDENUMS ON}
+  { "http://schemas.datacontract.org/2004/07/Tet.Services.Models"[GblSmpl] }
+  OrderPaymentStatus = (Processing, Success, Failed, Timeout, NotFound, Cancelled);
+
+  { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblSmpl] }
+  ServiceConstant_ResultCode = (Success, InvalidSecurityInfo, InvalidParameter, Error, Failed, ServiceError, NotFound);
+
+  {$SCOPEDENUMS OFF}
+
+  ArrayOfVisitor = array of Visitor2;           { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblCplx] }
+
+
+  // ************************************************************************ //
+  // XML       : Visitor, global, <complexType>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models
+  // ************************************************************************ //
+  Visitor2 = class(TRemotable)
+  private
+    FVisitorId: Int64;
+    FVisitorId_Specified: boolean;
+    FVisitorName: string;
+    FVisitorName_Specified: boolean;
+    procedure SetVisitorId(Index: Integer; const AInt64: Int64);
+    function  VisitorId_Specified(Index: Integer): boolean;
+    procedure SetVisitorName(Index: Integer; const Astring: string);
+    function  VisitorName_Specified(Index: Integer): boolean;
+  published
+    property VisitorId:   Int64   Index (IS_OPTN) read FVisitorId write SetVisitorId stored VisitorId_Specified;
+    property VisitorName: string  Index (IS_OPTN or IS_NLBL) read FVisitorName write SetVisitorName stored VisitorName_Specified;
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : BaseRespose, global, <complexType>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models
+  // ************************************************************************ //
+  BaseRespose2 = class(TRemotable)
+  private
+    FResponseCode: ServiceConstant_ResultCode;
+    FResponseCode_Specified: boolean;
+    FResponseMessages: string;
+    FResponseMessages_Specified: boolean;
+    procedure SetResponseCode(Index: Integer; const AServiceConstant_ResultCode: ServiceConstant_ResultCode);
+    function  ResponseCode_Specified(Index: Integer): boolean;
+    procedure SetResponseMessages(Index: Integer; const Astring: string);
+    function  ResponseMessages_Specified(Index: Integer): boolean;
+  published
+    property ResponseCode:     ServiceConstant_ResultCode  Index (IS_OPTN) read FResponseCode write SetResponseCode stored ResponseCode_Specified;
+    property ResponseMessages: string                      Index (IS_OPTN or IS_NLBL) read FResponseMessages write SetResponseMessages stored ResponseMessages_Specified;
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : VisitorResponse, global, <complexType>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models
+  // ************************************************************************ //
+  VisitorResponse2 = class(BaseRespose2)
+  private
+    FVisitors: ArrayOfVisitor;
+    FVisitors_Specified: boolean;
+    procedure SetVisitors(Index: Integer; const AArrayOfVisitor: ArrayOfVisitor);
+    function  Visitors_Specified(Index: Integer): boolean;
+  public
+    destructor Destroy; override;
+  published
+    property Visitors: ArrayOfVisitor  Index (IS_OPTN or IS_NLBL) read FVisitors write SetVisitors stored Visitors_Specified;
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : VisitorWristbandResponse, global, <complexType>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap
+  // ************************************************************************ //
+  VisitorWristbandResponse2 = class(BaseRespose2)
+  private
+  published
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : VisitorWristbandResponse, global, <element>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap
+  // ************************************************************************ //
+  VisitorWristbandResponse = class(VisitorWristbandResponse2)
+  private
+  published
+  end;
+
+  ArrayOfVisitorInfo = array of VisitorInfo2;   { "http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"[GblCplx] }
+
+
+  // ************************************************************************ //
+  // XML       : BaseRespose, global, <element>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models
+  // ************************************************************************ //
+  BaseRespose = class(BaseRespose2)
+  private
+  published
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : Visitor, global, <element>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models
+  // ************************************************************************ //
+  Visitor = class(Visitor2)
+  private
+  published
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : VisitorInfo, global, <complexType>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models
+  // ************************************************************************ //
+  VisitorInfo2 = class(TRemotable)
+  private
+    FVisitorId: Int64;
+    FVisitorRfid: string;
+  published
+    property VisitorId:   Int64   read FVisitorId write FVisitorId;
+    property VisitorRfid: string  Index (IS_NLBL) read FVisitorRfid write FVisitorRfid;
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : VisitorInfo, global, <element>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models
+  // ************************************************************************ //
+  VisitorInfo = class(VisitorInfo2)
+  private
+  published
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : OrderPaymentStatusResponse, global, <complexType>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models
+  // ************************************************************************ //
+  OrderPaymentStatusResponse2 = class(BaseRespose2)
+  private
+  published
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : OrderPaymentStatusResponse, global, <element>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models
+  // ************************************************************************ //
+  OrderPaymentStatusResponse = class(OrderPaymentStatusResponse2)
+  private
+  published
+  end;
+
+
+
+  // ************************************************************************ //
+  // XML       : VisitorResponse, global, <element>
+  // Namespace : http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models
+  // ************************************************************************ //
+  VisitorResponse = class(VisitorResponse2)
+  private
+  published
+  end;
+
+
+  // ************************************************************************ //
+  // Namespace : http://tempuri.org/
+  // soapAction: http://tempuri.org/IntegrationService/%operationName%
+  // transport : http://schemas.xmlsoap.org/soap/http
+  // style     : document
+  // use       : literal
+  // binding   : BasicHttpsBinding_IntegrationService
+  // service   : TetIntegrationService
+  // port      : BasicHttpsBinding_IntegrationService
+  // URL       : https://api-tet-intregationsnowstaging.infolytx.net/v1/IntegrationService.svc/IntegrationService.svc
+  // ************************************************************************ //
+  IntegrationService = interface(IInvokable)
+  ['{4B9F44F1-6B24-020A-C570-76E0947D0115}']
+    function  GetVisitors(const bookingId: Int64): VisitorResponse2; stdcall;
+    function  AssignVisitorWristbandList(const bookingId: Int64; const visitors: ArrayOfVisitorInfo): VisitorWristbandResponse2; stdcall;
+    function  AssignVisitorWristband(const bookingId: Int64; const visitors: ArrayOfVisitorInfo): VisitorWristbandResponse2; stdcall;
+    function  UpdateOrderPaymentStatus(const orderId: Integer; const status: OrderPaymentStatus): OrderPaymentStatusResponse2; stdcall;
+  end;
+
+function GetIntegrationService(UseWSDL: Boolean=System.False; Addr: string=''; HTTPRIO: THTTPRIO = nil): IntegrationService;
+
+
+implementation
+  uses System.SysUtils;
+
+function GetIntegrationService(UseWSDL: Boolean; Addr: string; HTTPRIO: THTTPRIO): IntegrationService;
+const
+  defWSDL = 'https://api-tet-intregationsnowstaging.infolytx.net/v1/IntegrationService.svc?wsdl';
+  defURL  = 'https://api-tet-intregationsnowstaging.infolytx.net/v1/IntegrationService.svc/IntegrationService.svc';
+  defSvc  = 'TetIntegrationService';
+  defPrt  = 'BasicHttpsBinding_IntegrationService';
+var
+  RIO: THTTPRIO;
+begin
+  Result := nil;
+  if (Addr = '') then
+  begin
+    if UseWSDL then
+      Addr := defWSDL
+    else
+      Addr := defURL;
+  end;
+  if HTTPRIO = nil then
+    RIO := THTTPRIO.Create(nil)
+  else
+    RIO := HTTPRIO;
+  try
+    Result := (RIO as IntegrationService);
+    if UseWSDL then
+    begin
+      RIO.WSDLLocation := Addr;
+      RIO.Service := defSvc;
+      RIO.Port := defPrt;
+    end else
+      RIO.URL := Addr;
+  finally
+    if (Result = nil) and (HTTPRIO = nil) then
+      RIO.Free;
+  end;
+end;
+
+
+procedure Visitor2.SetVisitorId(Index: Integer; const AInt64: Int64);
+begin
+  FVisitorId := AInt64;
+  FVisitorId_Specified := True;
+end;
+
+function Visitor2.VisitorId_Specified(Index: Integer): boolean;
+begin
+  Result := FVisitorId_Specified;
+end;
+
+procedure Visitor2.SetVisitorName(Index: Integer; const Astring: string);
+begin
+  FVisitorName := Astring;
+  FVisitorName_Specified := True;
+end;
+
+function Visitor2.VisitorName_Specified(Index: Integer): boolean;
+begin
+  Result := FVisitorName_Specified;
+end;
+
+procedure BaseRespose2.SetResponseCode(Index: Integer; const AServiceConstant_ResultCode: ServiceConstant_ResultCode);
+begin
+  FResponseCode := AServiceConstant_ResultCode;
+  FResponseCode_Specified := True;
+end;
+
+function BaseRespose2.ResponseCode_Specified(Index: Integer): boolean;
+begin
+  Result := FResponseCode_Specified;
+end;
+
+procedure BaseRespose2.SetResponseMessages(Index: Integer; const Astring: string);
+begin
+  FResponseMessages := Astring;
+  FResponseMessages_Specified := True;
+end;
+
+function BaseRespose2.ResponseMessages_Specified(Index: Integer): boolean;
+begin
+  Result := FResponseMessages_Specified;
+end;
+
+destructor VisitorResponse2.Destroy;
+var
+  I: Integer;
+begin
+  for I := 0 to System.Length(FVisitors)-1 do
+    System.SysUtils.FreeAndNil(FVisitors[I]);
+  System.SetLength(FVisitors, 0);
+  inherited Destroy;
+end;
+
+procedure VisitorResponse2.SetVisitors(Index: Integer; const AArrayOfVisitor: ArrayOfVisitor);
+begin
+  FVisitors := AArrayOfVisitor;
+  FVisitors_Specified := True;
+end;
+
+function VisitorResponse2.Visitors_Specified(Index: Integer): boolean;
+begin
+  Result := FVisitors_Specified;
+end;
+
+initialization
+  { IntegrationService }
+  InvRegistry.RegisterInterface(TypeInfo(IntegrationService), 'http://tempuri.org/', 'utf-8');
+  InvRegistry.RegisterDefaultSOAPAction(TypeInfo(IntegrationService), 'http://tempuri.org/IntegrationService/%operationName%');
+  InvRegistry.RegisterInvokeOptions(TypeInfo(IntegrationService), ioDocument);
+  { IntegrationService.GetVisitors }
+  InvRegistry.RegisterMethodInfo(TypeInfo(IntegrationService), 'GetVisitors', '',
+                                 '[ReturnName="GetVisitorsResult"]', IS_OPTN or IS_NLBL);
+  InvRegistry.RegisterParamInfo(TypeInfo(IntegrationService), 'GetVisitors', 'GetVisitorsResult', '',
+                                '[Namespace="http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"]', IS_NLBL);
+  { IntegrationService.AssignVisitorWristbandList }
+  InvRegistry.RegisterMethodInfo(TypeInfo(IntegrationService), 'AssignVisitorWristbandList', '',
+                                 '[ReturnName="AssignVisitorWristbandListResult"]', IS_OPTN or IS_NLBL);
+  InvRegistry.RegisterParamInfo(TypeInfo(IntegrationService), 'AssignVisitorWristbandList', 'visitors', '',
+                                '[Namespace="http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models", ArrayItemName="VisitorInfo"]', IS_NLBL);
+  InvRegistry.RegisterParamInfo(TypeInfo(IntegrationService), 'AssignVisitorWristbandList', 'AssignVisitorWristbandListResult', '',
+                                '[Namespace="http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap"]', IS_NLBL);
+  { IntegrationService.AssignVisitorWristband }
+  InvRegistry.RegisterMethodInfo(TypeInfo(IntegrationService), 'AssignVisitorWristband', '',
+                                 '[ReturnName="AssignVisitorWristbandResult"]', IS_OPTN or IS_NLBL);
+  InvRegistry.RegisterParamInfo(TypeInfo(IntegrationService), 'AssignVisitorWristband', 'visitors', '',
+                                '[Namespace="http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models", ArrayItemName="VisitorInfo"]', IS_NLBL);
+  InvRegistry.RegisterParamInfo(TypeInfo(IntegrationService), 'AssignVisitorWristband', 'AssignVisitorWristbandResult', '',
+                                '[Namespace="http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap"]', IS_NLBL);
+  { IntegrationService.UpdateOrderPaymentStatus }
+  InvRegistry.RegisterMethodInfo(TypeInfo(IntegrationService), 'UpdateOrderPaymentStatus', '',
+                                 '[ReturnName="UpdateOrderPaymentStatusResult"]', IS_OPTN or IS_NLBL);
+  InvRegistry.RegisterParamInfo(TypeInfo(IntegrationService), 'UpdateOrderPaymentStatus', 'status', '',
+                                '[Namespace="http://schemas.datacontract.org/2004/07/Tet.Services.Models"]');
+  InvRegistry.RegisterParamInfo(TypeInfo(IntegrationService), 'UpdateOrderPaymentStatus', 'UpdateOrderPaymentStatusResult', '',
+                                '[Namespace="http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models"]', IS_NLBL);
+  RemClassRegistry.RegisterXSInfo(TypeInfo(OrderPaymentStatus), 'http://schemas.datacontract.org/2004/07/Tet.Services.Models', 'OrderPaymentStatus');
+  RemClassRegistry.RegisterXSInfo(TypeInfo(ArrayOfVisitor), 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'ArrayOfVisitor');
+  RemClassRegistry.RegisterXSInfo(TypeInfo(ServiceConstant_ResultCode), 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'ServiceConstant_ResultCode', 'ServiceConstant.ResultCode');
+  RemClassRegistry.RegisterXSClass(Visitor2, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'Visitor2', 'Visitor');
+  RemClassRegistry.RegisterXSClass(BaseRespose2, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'BaseRespose2', 'BaseRespose');
+  RemClassRegistry.RegisterXSClass(VisitorResponse2, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'VisitorResponse2', 'VisitorResponse');
+  RemClassRegistry.RegisterExternalPropName(TypeInfo(VisitorResponse2), 'Visitors', '[ArrayItemName="Visitor"]');
+  RemClassRegistry.RegisterXSClass(VisitorWristbandResponse2, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap', 'VisitorWristbandResponse2', 'VisitorWristbandResponse');
+  RemClassRegistry.RegisterXSClass(VisitorWristbandResponse, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap', 'VisitorWristbandResponse');
+  RemClassRegistry.RegisterXSInfo(TypeInfo(ArrayOfVisitorInfo), 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'ArrayOfVisitorInfo');
+  RemClassRegistry.RegisterXSClass(BaseRespose, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'BaseRespose');
+  RemClassRegistry.RegisterXSClass(Visitor, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'Visitor');
+  RemClassRegistry.RegisterXSClass(VisitorInfo2, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'VisitorInfo2', 'VisitorInfo');
+  RemClassRegistry.RegisterXSClass(VisitorInfo, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'VisitorInfo');
+  RemClassRegistry.RegisterXSClass(OrderPaymentStatusResponse2, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'OrderPaymentStatusResponse2', 'OrderPaymentStatusResponse');
+  RemClassRegistry.RegisterXSClass(OrderPaymentStatusResponse, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'OrderPaymentStatusResponse');
+  RemClassRegistry.RegisterXSClass(VisitorResponse, 'http://schemas.datacontract.org/2004/07/Tet.Api.Integration.Soap.Models', 'VisitorResponse');
+
+end.

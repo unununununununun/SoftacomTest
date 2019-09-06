@@ -1,0 +1,81 @@
+object Test: TTest
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 430
+  ClientWidth = 677
+  Transparency = True
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Layout1: TLayout
+    Align = Client
+    Size.Width = 677.000000000000000000
+    Size.Height = 430.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object Rectangle1: TRectangle
+      Align = Client
+      Fill.Color = xFFF0F0F0
+      Margins.Left = 20.000000000000000000
+      Margins.Top = 20.000000000000000000
+      Margins.Right = 20.000000000000000000
+      Margins.Bottom = 20.000000000000000000
+      Size.Width = 637.000000000000000000
+      Size.Height = 390.000000000000000000
+      Size.PlatformDefault = False
+      object BlurEffect1: TBlurEffect
+        Softness = 0.050000000745058060
+        Enabled = False
+      end
+      object Button1: TButton
+        Position.X = 19.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 593.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'get data'
+        OnClick = Button1Click
+      end
+      object GlowEffect1: TGlowEffect
+        Softness = 0.200000002980232200
+        GlowColor = claBlack
+        Opacity = 0.600000023841857900
+      end
+      object Memo1: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Position.X = 17.000000000000000000
+        Position.Y = 96.000000000000000000
+        Size.Width = 593.000000000000000000
+        Size.Height = 273.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Viewport.Width = 589.000000000000000000
+        Viewport.Height = 269.000000000000000000
+      end
+      object Rectangle2: TRectangle
+        Align = MostTop
+        Fill.Color = xFF3E3E3E
+        Size.Width = 637.000000000000000000
+        Size.Height = 28.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+  end
+  object sosoap: TSoapConnection
+    Agent = 'CodeGear SOAP 1.3'
+    Connected = True
+    Password = 'AfDGlGhWIf12345'
+    URL = 
+      'https://api-tet-intregationsnowstaging.infolytx.net/v1/Integrati' +
+      'onService.svc/IntegrationService.svc'
+    SOAPServerIID = 'IAppServerSOAP - {C99F4735-D6D2-495C-8CA2-E53E5A439E61}'
+    UserName = 'demouser'
+    UseSOAPAdapter = False
+    Left = 576
+    Top = 8
+  end
+end

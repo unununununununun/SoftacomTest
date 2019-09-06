@@ -1,0 +1,146 @@
+unit main;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo,
+  IntegrationService1,
+  Soap.InvokeRegistry, Soap.SOAPHTTPClient, Soap.XSBuiltIns, opCOnvertOptions, XMLIntf,
+  soap.wsse.security.userpass, soap.wsse, Data.DB, Datasnap.DBClient, Soap.SOAPConn,SOAPHTTPTrans,System.Net.HttpClient,IdCoderMIME,System.NetEncoding;
+
+type
+  TForm1 = class(TForm)
+    Memo1: TMemo;
+    Button1: TButton;
+    sosoap: TSoapConnection;
+    procedure Button1Click(Sender: TObject);
+  private
+    procedure BeforePost(const HTTPReqResp: THTTPReqResp;  Client: THTTPClient);
+  public
+    { Public declarations }
+  end;
+
+
+type
+ TSOAPCredentials = class(TSoapHeader)
+ private
+    FPassword: string;
+    FUsername: string;
+    FKeyClient: string;
+ public
+   function ObjectToSOAP(RootNode, ParentNode: IXMLNode;
+                            const ObjConverter: IObjConverter;
+                            const NodeName, NodeNamespace, ChildNamespace: InvString; ObjConvOpts: TObjectConvertOptions;
+                            out RefID: InvString): IXMLNode; override;
+ published
+   property userName     : string read FUsername write Fusername;
+   property userPassword : string read FPassword write FPassword;
+   property keyClient : string read FKeyClient write FKeyClient;
+ end;
+
+
+var
+  Form1: TForm1;
+  is1 : IntegrationService;
+
+
+implementation
+
+
+
+{$R *.fmx}
+function TSOAPCredentials.ObjectToSOAP(RootNode, ParentNode: IXMLNode; const ObjConverter: IObjConverter; const NodeName,
+  NodeNamespace, ChildNamespace: InvString; ObjConvOpts: TObjectConvertOptions; out RefID: InvString): IXMLNode;
+begin
+ Result := ParentNode.AddChild('userName');
+ Result.Text := FUsername;
+ Result := ParentNode.AddChild('userPassword');
+ Result.Text := FPassword;
+ Result := ParentNode.AddChild('keyClient');
+ Result.Text := FKeyClient;
+end;
+
+
+procedure AddSoapHeaderSecurity(aSession: IntegrationService);
+var
+  Wsse: Security;
+  Headers: ISOAPHeaders;
+  UsernameToken:myUsernameToken;
+  user : AttributedString;
+  pass : PasswordString;
+begin
+
+  //user := AttributedString.Create;
+  pass := PasswordString.Create;
+ // user.Text := 'demouser';
+  pass.Text := 'AfDGlGhWIf12345';
+  Wsse := Security.Create('demouser','AfDGlGhWIf12345');
+  Wsse.MustUnderstand := True;
+  UsernameToken := myUsernameToken.Create();
+  Wsse.UsernameToken := UsernameToken;
+
+
+  Wsse.UsernameToken.Id := TGuid.NewGuid().ToString();
+
+ // Wsse.UsernameToken.Username := user;
+ // Wsse.UsernameToken.Password := Password.Create();
+ // Wsse.UsernameToken.Password.Type_ := 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText';
+ // Wsse.UsernameToken.Password := pass;
+  Headers := aSession as ISOAPHeaders;
+  Headers.OwnsSentHeaders := True;
+  Headers.Send(Wsse);
+
+
+
+end;
+
+procedure TForm1.BeforePost(const HTTPReqResp: THTTPReqResp;  Client: THTTPClient);
+var auth, UserName, Password: String;
+begin
+//HTTPReqResp.UserName := 'demouser';
+//HTTPReqResp.Password := 'AfDGlGhWIf12345';
+//Client.CustomHeaders['Authorization'] := 'Basic ' + IdCoderMIME.TIdEncoderMIME.EncodeString('demouser:AfDGlGhWIf12345');
+     UserName := 'demouser';
+     Password := 'AfDGlGhWIf12345';
+  Client.CustomHeaders['Authorization'] := 'Authorization: Basic ' + TNetEncoding.Base64.Encode(UserName + ':' + Password);
+
+
+end;
+
+
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+ vr : VisitorResponse2;
+ Rio  : THTTPRIO;
+ Cred : TSOAPCredentials;
+begin
+ // Rio := THttpRIO.Create(nil);
+
+
+//  rio.HTTPWebNode.UserName:= 'demouser';
+ // rio.Port := 'BasicHttpsBinding_IntegrationService';
+ // rio.Service :='TetIntegrationService';
+ // rio.HTTPWebNode.Password :='AfDGlGhWIf12345';
+ //   rio.WSDLLocation := 'https://api-tet-intregationsnowstaging.infolytx.net/v1/IntegrationService.svc?wsdl';
+ // rio.HTTPWebNode.WSDLView.UserName := rio.HTTPWebNode.UserName;
+ // rio.HTTPWebNode.WSDLView.Password := rio.HTTPWebNode.Password;
+
+
+
+ is1 := IntegrationService1.GetIntegrationService(false,'',nil);
+
+ AddSoapHeaderSecurity(is1);
+
+
+ //vr := VisitorResponse2.Create();
+ vr:=  is1.GetVisitors(7701);
+
+ //memo1.Text:= PChar(Pointer(is1.GetVisitors(7701))^);
+ //is1.GetVisitors(int64(7701));
+
+
+end;
+
+end.
