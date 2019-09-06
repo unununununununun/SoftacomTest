@@ -32,7 +32,7 @@ object MForm: TMForm
       object BlurEffect1: TBlurEffect
         Softness = 0.050000000745058060
       end
-      object Button1: TButton
+      object b1: TButton
         Anchors = [akLeft, akTop, akRight]
         StyledSettings = [Family]
         Position.X = 15.000000000000000000
@@ -45,7 +45,7 @@ object MForm: TMForm
         TextSettings.Font.Size = 14.000000000000000000
         TextSettings.Font.StyleExt = {00020000000000000004000000}
         TextSettings.FontColor = xFF3E3E3E
-        OnClick = Button1Click
+        OnClick = b1Click
       end
       object Memo1: TMemo
         Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
