@@ -54,13 +54,17 @@ Memo1.Lines.Clear;
   TTask.Run(
   procedure
    begin
-   is1 := IntegrationService1.GetIntegrationService();
-
+   try
+    is1 := IntegrationService1.GetIntegrationService();
     AddSoapHeaderSecurity(is1,'demouser','AfDGlGhWIf12345');
-
+    except on E:Exception do
+     ShowMessage(E.message);
+     exit;
+    end;
     TThread.Synchronize(nil,
     procedure
     begin
+
      vr :=  is1.GetVisitors(7701);
      memo1.Lines.Add(#13#10);
      memo1.Lines.Add('  Visitor 7701[0] :: ID=' +vr.Visitors[0].VisitorId.ToString+ ' Name='+vr.Visitors[0].VisitorName);
@@ -108,6 +112,7 @@ end;
 procedure TMForm.Rectangle2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 var hw:hwnd;
 begin
+ //перетягивание окна за любой контрол
  hw := FindWindow(nil,PChar(MForm.Caption));
  ReleaseCapture;
  SendMessage(hw, WM_SysCommand,61458,0);
